@@ -1,0 +1,28 @@
+{
+  "name": "monorepo-manager",
+  "private": true,
+  "scripts": {
+    "build": ""
+  },
+  "files": ["bin"],
+  "packageManager": "yarn@4.13.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "resolutions": {
+    "eslint": "^9",
+    "binary-collections": "workspace:^",
+    "@dimaslanjaka/ai-toolkit": "file:./releases/ai-toolkit.tgz",
+    "@dimaslanjaka/eslint-base-config": "workspace:^",
+    "cross-spawn": "workspace:^",
+    "git-command-helper": "workspace:^",
+    "anti-api": "workspace:^",
+    "opencode-agent-memory": "workspace:^",
+    "sbg-utility": "https://github.com/dimaslanjaka/static-blog-generator/raw/sbg-utility/packages/sbg-utility/release/sbg-utility.tgz",
+    "hexo-util": "https://github.com/dimaslanjaka/hexo/raw/65bbfe29d65b55320eb61bd263f16e1519c6c1b0/releases/hexo-util.tgz",
+    "opencode-plugin-memory": "workspace:^"
+  },
+  "dependencies": {
+    "node-gyp": "^12.4.0"
+  }
+}
