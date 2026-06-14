@@ -2,6 +2,7 @@ import json
 import shutil
 import subprocess
 import sys
+import argparse
 from pathlib import Path
 
 RELEASES_DIR = Path("releases")
@@ -67,7 +68,7 @@ def clean_old_tarballs():
     # Skip cleaning - preserve existing tarballs
     pass
 
-def build_packages():
+def build_packages(do_clean=False):
     packages_dir = Path("packages")
     if not packages_dir.exists():
         print("No packages directory found")
@@ -94,7 +95,8 @@ def build_packages():
         print(f"\nProcessing: {pkg_path.name} -> {pkg_name}")
         print("-" * 40)
 
-        run_command("npm run clean", cwd=pkg_path)
+        if do_clean:
+            run_command("npm run clean", cwd=pkg_path)
         success = run_command_with_log("npm run build", cwd=pkg_path, log_file=pkg_path.name)
 
         if not success:
@@ -157,7 +159,7 @@ def update_package_json():
                 with open(pkg_meta_path, "r", encoding="utf-8") as f:
                     meta = json.load(f)
                     actual_name = meta.get("name")
-                    
+
                     path = _find_tarball_path(actual_name)
                     if path:
                         resolutions[alias] = path
@@ -172,13 +174,17 @@ def update_package_json():
         f.write("\n")
 
 def main():
+    parser = argparse.ArgumentParser(description="Build and release script")
+    parser.add_argument("--clean", action="store_true", help="Run 'npm run clean' before building")
+    args = parser.parse_args()
+
     print("=" * 50)
     print("Build and Release Script")
     print("=" * 50)
 
     ensure_releases_dir()
     clean_old_tarballs()
-    built_packages = build_packages()
+    built_packages = build_packages(do_clean=args.clean)
 
     print("\n" + "=" * 50)
     print("Done! Tarballs collected in releases:")
