@@ -8,16 +8,15 @@
       "disable": true
     }
   },
-  "shell": "pwsh",
   "autoupdate": true,
   "snapshot": true,
   "formatter": false,
-  "lsp": false,
+  "lsp": true,
   "plugin": [
-    "opencode-helicone-session",
+    "opencode-helicone-session@latest",
     "oh-my-opencode-slim@latest",
     "envsitter-guard@latest",
-    "opencode-mem",
+    "opencode-mem@latest",
     "opencode-agent-memory@https://github.com/dimaslanjaka/opencode-file-memory/raw/refs/heads/main/release/opencode-agent-memory.tgz",
     "@tarquinen/opencode-smart-title@latest",
     "@tarquinen/opencode-dcp@latest",
@@ -30,13 +29,12 @@
     "packages/*/AGENTS.md"
   ],
   "mcp": {
-    "playwright": {
+    "context-compress": {
       "enabled": true,
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "@playwright/mcp@latest"
+        "node",
+        "D:/Repositories/workspace/packages/ai-toolkit/src/mcp-server/context-compress/server.mjs"
       ]
     }
   }
