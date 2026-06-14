@@ -57,6 +57,8 @@ for /d %%D in ("!CURRENT!\*") do (
     rem skip
   ) else if /i "!NAME!"==".cache" (
     rem skip
+  ) else if /i "!NAME!"==".opencode" (
+    rem skip
   ) else if /i "!NAME!"=="node_modules" (
     if not exist "%TRASH%" mkdir "%TRASH%" >nul 2>&1
 
