@@ -8,6 +8,7 @@ triggers:
   - "create commit"
   - "generate commit staged files"
   - "generate commit for staged changes"
+  - "commit staged files by group context"
 tags:
   - git
   - commits
@@ -43,7 +44,7 @@ git diff --name-only --staged
   * **Subject**: short descriptive summary
 * Example AI instruction:
 
-> “Analyze this git diff and generate a conventional commit message in the form `type(scope): subject`. Focus on what changed, why it changed, and ensure it’s concise.”
+> "Analyze this git diff and generate a conventional commit message in the form `type(scope): subject`. Focus on what changed, why it changed, and ensure it's concise."
 
 ---
 
@@ -95,6 +96,7 @@ echo feat(auth): implement AI-based login validation > commit.txt
 git commit -F commit.txt
 ```
 
+> **⚠️ Rule:** Never use `git add -A` or `git add .`. Always stage files **explicitly by name** to ensure only the intended context group is committed.
 > Repeat for all context groups. `commit.txt` is **never deleted**, so it can be reused or modified for the next commit.
 
 ---
@@ -121,12 +123,13 @@ git log --oneline --max-count=10
 
 ---
 
-### Key Principles
+## Key Principles
 
 1. **Never commit mixed contexts**: each commit corresponds to one AI-inferred context.
 2. **Always use `commit.txt`**: ensures uniformity and cross-shell compatibility.
-3. **Leverage AI for commit intelligence**: filenames alone are not enough; diffs determine the commit type, scope, and subject.
-4. **Repeatable & transparent**: human-readable commit messages, consistent workflow.
+3. **Never use `git add -A` or `git add .`**: always stage files **explicitly and individually** to prevent accidental inclusion of unrelated changes.
+4. **Leverage AI for commit intelligence**: filenames alone are not enough; diffs determine the commit type, scope, and subject.
+5. **Repeatable & transparent**: human-readable commit messages, consistent workflow.
 
 ---
 
