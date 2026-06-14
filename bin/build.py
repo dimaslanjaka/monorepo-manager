@@ -68,7 +68,7 @@ def clean_old_tarballs():
     # Skip cleaning - preserve existing tarballs
     pass
 
-def build_packages(do_clean=False):
+def build_packages(do_clean=False, package_name=None):
     packages_dir = Path("packages")
     if not packages_dir.exists():
         print("No packages directory found")
@@ -76,7 +76,17 @@ def build_packages(do_clean=False):
 
     built_packages = []
 
-    for pkg_path in sorted(packages_dir.iterdir()):
+    # If a specific package is requested, find it
+    if package_name:
+        pkg_path = packages_dir / package_name
+        if not pkg_path.exists():
+            print(f"Error: Package directory not found: {pkg_path}")
+            return []
+        pkg_paths = [pkg_path]
+    else:
+        pkg_paths = sorted(packages_dir.iterdir())
+
+    for pkg_path in pkg_paths:
         if not pkg_path.is_dir():
             continue
 
@@ -110,6 +120,8 @@ def build_packages(do_clean=False):
         dest_tgz = RELEASES_DIR / f"{pkg_name}.tgz"
 
         if source_tgz.exists():
+            # Ensure parent directory exists (for scoped package names like @scope/name)
+            dest_tgz.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source_tgz, dest_tgz)
             source_tgz.unlink()  # Remove the original
             built_packages.append(pkg_name)
@@ -175,16 +187,20 @@ def update_package_json():
 
 def main():
     parser = argparse.ArgumentParser(description="Build and release script")
+    parser.add_argument("package", nargs="?", help="Optional: specific package name to build (e.g., binary-collections)")
     parser.add_argument("--clean", action="store_true", help="Run 'npm run clean' before building")
     args = parser.parse_args()
 
     print("=" * 50)
-    print("Build and Release Script")
+    if args.package:
+        print(f"Build Script: {args.package}")
+    else:
+        print("Build and Release Script")
     print("=" * 50)
 
     ensure_releases_dir()
     clean_old_tarballs()
-    built_packages = build_packages(do_clean=args.clean)
+    built_packages = build_packages(do_clean=args.clean, package_name=args.package)
 
     print("\n" + "=" * 50)
     print("Done! Tarballs collected in releases:")
