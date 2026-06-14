@@ -2,7 +2,6 @@ import json
 import shutil
 import subprocess
 import sys
-from datetime import datetime
 from pathlib import Path
 
 RELEASES_DIR = Path("releases")
@@ -36,8 +35,7 @@ def run_command_with_log(cmd, cwd=None, log_file=None):
     """Run command and also write output to log file."""
     result = subprocess.run(cmd, shell=True, cwd=cwd, capture_output=True, text=True, encoding="utf-8", errors="replace")
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_path = LOGS_DIR / f"{log_file}_{timestamp}.log"
+    log_path = LOGS_DIR / f"{log_file}.log"
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
     with open(log_path, "w", encoding="utf-8") as f:
