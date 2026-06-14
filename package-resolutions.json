@@ -1,0 +1,10 @@
+{
+  "binary-collections": "https://github.com/dimaslanjaka/bin/raw/508f48844d990515ebd1970d5d59483ae99fbb13/releases/bin.tgz",
+  "@dimaslanjaka/eslint-base-config": "https://github.com/dimaslanjaka/eslint-base-config/raw/94dc3bed894d019a216b47d9bf0413f7cfdcd45c/release/dimaslanjaka-eslint-base-config.tgz",
+  "@dimaslanjaka/ai-toolkit": "https://github.com/dimaslanjaka/ai-toolkit/raw/refs/heads/master/release/ai-toolkit.tgz",
+  "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn/raw/private/release/cross-spawn.tgz",
+  "git-command-helper": "https://github.com/dimaslanjaka/git-command-helper/raw/pre-release/release/git-command-helper.tgz",
+  "opencode-agent-memory": "https://github.com/dimaslanjaka/opencode-file-memory/raw/main/release/opencode-agent-memory.tgz",
+  "sbg-utility": "https://github.com/dimaslanjaka/static-blog-generator/raw/sbg-utility/packages/sbg-utility/release/sbg-utility.tgz",
+  "hexo-util": "https://github.com/dimaslanjaka/hexo/raw/65bbfe29d65b55320eb61bd263f16e1519c6c1b0/releases/hexo-util.tgz"
+}

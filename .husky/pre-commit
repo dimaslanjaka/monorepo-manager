@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Run lint-staged through Yarn so the local binary is resolved consistently
+corepack yarn exec lint-staged --config lint-staged.config.js
+
+# Merge package-resolutions.json into package.json resolutions field
+python scripts/fix-resolutions-pre-commit.py || exit 1
