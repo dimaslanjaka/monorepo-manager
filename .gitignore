@@ -36,6 +36,8 @@ bower_components/
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 build/Release
+**/tmp/**
+*.txt
 
 # Bundlers and frameworks caches
 .cache
@@ -79,9 +81,6 @@ pids
 .tern-port
 .tsbuildinfo
 
-# npm pack output
-*.tgz
-
 # Lock files
 *.lock*
 
@@ -92,5 +91,11 @@ pids
 **/.vitepress/dist
 **/.vitepress/cache
 
-# Other
+# npm pack output
+*.tgz
 releases/
+packages/
+
+.opencode/*
+!.opencode/agents/
+!.opencode/opencode.*
