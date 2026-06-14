@@ -25,6 +25,7 @@
   "instructions": [
     "AGENTS.md",
     ".github/instructions/*.md",
+    ".github/copilot-instructions.md",
     ".github/*.md",
     "packages/*/AGENTS.md"
   ],
@@ -35,6 +36,15 @@
       "command": [
         "node",
         "D:/Repositories/workspace/packages/ai-toolkit/src/mcp-server/context-compress/server.mjs"
+      ]
+    },
+    "playwright": {
+      "enabled": true,
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp@latest"
       ]
     }
   }
